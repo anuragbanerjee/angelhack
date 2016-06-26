@@ -17,39 +17,29 @@ var storage = (function () {
     /*
      * The Game class stores all game states for the user
      */
-    function Game(session, data) {
+    function Order(session, data) {
         if (data) {
             this.data = data;
         } else {
             this.data = {
-                players: [],
-                scores: {}
+                currentDiner: '',
+                ordername: [],
+                order: {},
+                placed:{}
             };
         }
         this._session = session;
     }
 
-    Game.prototype = {
-        isEmptyScore: function () {
-            //check if any one had non-zero score,
-            //it can be used as an indication of whether the game has just started
-            var allEmpty = true;
-            var gameData = this.data;
-            gameData.players.forEach(function (player) {
-                if (gameData.scores[player] !== 0) {
-                    allEmpty = false;
-                }
-            });
-            return allEmpty;
-        },
+    Order.prototype = {
         save: function (callback) {
             //save the game states in the session,
             //so next time we can save a read from dynamoDB
-            this._session.attributes.currentGame = this.data;
+            this._session.attributes.currentOrder = this.data;
             dynamodb.putItem({
-                TableName: 'ScoreKeeperUserData',
+                TableName: 'Orders',
                 Item: {
-                    CustomerId: {
+                    OrderId: {
                         S: this._session.user.userId
                     },
                     Data: {
@@ -68,40 +58,40 @@ var storage = (function () {
     };
 
     return {
-        loadGame: function (session, callback) {
-            if (session.attributes.currentGame) {
-                console.log('get game from session=' + session.attributes.currentGame);
-                callback(new Game(session, session.attributes.currentGame));
+        loadOrder: function (session, callback) {
+            if (session.attributes.currentOrder) {
+                console.log('get game from session=' + session.attributes.currentOrder);
+                callback(new Order(session, session.attributes.currentOrder));
                 return;
             }
             dynamodb.getItem({
-                TableName: 'ScoreKeeperUserData',
+                TableName: 'Orders',
                 Key: {
-                    CustomerId: {
+                    OrderId: {
                         S: session.user.userId
                     }
                 }
             }, function (err, data) {
-                var currentGame;
+                var currentOrder;
                 if (err) {
                     console.log(err, err.stack);
-                    currentGame = new Game(session);
-                    session.attributes.currentGame = currentGame.data;
-                    callback(currentGame);
+                    currentOrder = new Order(session);
+                    session.attributes.currentOrder = currentOrder.data;
+                    callback(currentOrder);
                 } else if (data.Item === undefined) {
-                    currentGame = new Game(session);
-                    session.attributes.currentGame = currentGame.data;
-                    callback(currentGame);
+                    currentOrder = new Order(session);
+                    session.attributes.currentOrder = currentOrder.data;
+                    callback(currentOrder);
                 } else {
                     console.log('get game from dynamodb=' + data.Item.Data.S);
-                    currentGame = new Game(session, JSON.parse(data.Item.Data.S));
-                    session.attributes.currentGame = currentGame.data;
-                    callback(currentGame);
+                    currentOrder = new Order(session, JSON.parse(data.Item.Data.S));
+                    session.attributes.currentOrder = currentOrder.data;
+                    callback(currentOrder);
                 }
             });
         },
-        newGame: function (session) {
-            return new Game(session);
+        newOrder: function (session) {
+            return new Order(session);
         }
     };
 })();

@@ -18,7 +18,7 @@
       "slots": [
         {
           "name": "item",
-          "type": "MenuItem"
+          "type": "MENU_ITEMS"
         },
         {
           "name": "quantity",
@@ -27,13 +27,16 @@
       ]
     },
     {
-      "intent": "AMAZON.YesIntent"
+      "intent": "ResetOrderIntent"
     },
     {
-      "intent": "AMAZON.NoIntent"
+      "intent": "ResetWholeIntent"
     },
     {
-      "intent": "AMAZON.HelpIntent"
+      "intent":"YesIntent"
+    },
+    {
+      "intent":"NoIntent"
     }
   ]
 }
