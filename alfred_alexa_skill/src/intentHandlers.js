@@ -13,24 +13,27 @@ var storage = require('./storage');
 
 var registerIntentHandlers = function (intentHandlers, skillContext) {
     
-
-    intentHandlers.StartOrder = function (intent, session, response) {
-        var speechOutput = 'Okay, start by telling your name';
-        response.tell(speechOutput);
-    };
-
     intentHandlers.AddNameToOrder = function (intent, session, response) {
-        var ordername =intent.slots.username.value;
-        var speechOutput;    
+        var ordername = intent.slots.username.value;
+       
+        var speechOutput,reprompt;    
         speechOutput = 'Hi ' + ordername + '. Please go ahead with your order';
+
         storage.loadOrder(session, function (currentOrder) {
+
             currentOrder.data.currentDiner = ordername;
-            currentOrder.data.ordername.push(ordername);
-            currentOrder.data.order[ordername] = '';
-            currentOrder.data.placed[ordername] = 'No';
-            currentOrder.save(function () {           
-                 response.tell(speechOutput);
-            });
+            if(currentOrder.data.order[ordername] == undefined) {
+               
+                currentOrder.data.ordername.push(ordername);
+                currentOrder.data.order[ordername] = {};
+                currentOrder.data.placed[ordername] = 'No';
+            }
+            else{
+
+            }
+            currentOrder.save(function () {                 
+                response.ask(speechOutput);
+            }); 
          });
     };
 
@@ -38,18 +41,28 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
         //give a player points, ask additional question if slot values are missing.
        
         var item = intent.slots.item.value;
-        var quantity = parseInt(intent.slots.quantity.value);
-        var speechOutput;
+        var quantity = intent.slots.quantity.value;
+        if (isNaN(quantity)) {
+            quantity = 1;
+        }
+        var speechOutput,reprompt; 
         storage.loadOrder(session, function (currentOrder) {
             
             var ordername  = currentOrder.data.currentDiner;
-            var newOrder =  currentOrder.data.order[ordername] + ' ' + quantity + ' ' + item;
-            currentOrder.data.order[ordername] = newOrder;
+            var order =  currentOrder.data.order[ordername];
+                     
+            if(item in order){
+                order[item] = parseInt(order[item]) + parseInt(quantity);
+            }
+            else{ 
+                order[item] = parseInt(quantity);
+            } 
 
-            speechOutput  = 'Anything Else?';
-            
+            currentOrder.data.order[ordername] = order;
+            speechOutput  = quantity + ' ' + item + ' ordered. ' + 'Anything Else?';
+           
             currentOrder.save(function () {
-                response.tell(speechOutput);
+                response.ask(speechOutput);
             });
     });
 
@@ -59,16 +72,49 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
      
         storage.loadOrder(session, function (currentOrder) {
             
-            var ordername  = currentOrder.data.currentDiner;
-            currentOrder.data.order[ordername] = '';
-
+            var ordername  = intent.slots.username.value;
+            if (ordername == undefined ){
+                ordername = currentOrder.data.currentDiner;
+            }   
+            currentOrder.data.order[ordername] = {};
+             var speechOutput,reprompt; 
             speechOutput  = 'Order cleared for ' + ordername + '. Please order again' ;
             
             currentOrder.save(function () {
-                response.tell(speechOutput);
+                response.ask(speechOutput);
             });
         });
     };
+
+     intentHandlers.InBetweenOrderIntent = function (intent, session, response) {
+     
+        storage.loadOrder(session, function (currentOrder) {
+            
+            currentOrder.data.currentDiner = '';
+            
+            var speechOutput = 'Okay next in line please. Welcome Sir, how may I help you';
+            var reprompt; 
+            currentOrder.save(function () {
+                response.ask(speechOutput);
+            });
+        });
+    };
+
+    intentHandlers.RepeatOrderIntent = function (intent, session, response) {
+     
+        storage.loadOrder(session, function (currentOrder) {
+            
+            var ordername  = intent.slots.username.value;
+            var orderJSON= currentOrder.data.order[ordername];
+            var order = '';
+            for (var item in orderJSON) {
+                order = order + ' ' + orderJSON[item] + ' ' + item;
+            }
+            response.tell(order);
+
+        });
+    };
+
 
     intentHandlers.ResetWholeIntent = function (intent, session, response) {
         //remove all players
@@ -86,9 +132,10 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
             currentOrder.data.placed[ordername] = 'Yes';
 
             var speechOutput  = 'Order finished for ' + ordername + '. Should I place the order?' ;
-            
+             var reprompt; 
             currentOrder.save(function () {
-                response.tell(speechOutput);
+                    response.ask(speechOutput);
+                
             });
         });
     };
@@ -106,9 +153,11 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
             delete currentOrder.data.placed[ordername];
 
             var speechOutput  = 'Order finished for ' + ordername + '. Wait for getting the order.' ;
-            
+             var reprompt; 
             currentOrder.save(function () {
-                response.tell(speechOutput);
+              
+                    response.tell(speechOutput);
+                
             });
         });
     };

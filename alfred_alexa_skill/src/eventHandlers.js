@@ -25,6 +25,15 @@ var registerEventHandlers = function (eventHandlers, skillContext) {
      
             var speechOutput = 'Okay, We are ready for ordering';
             response.ask(speechOutput);
+           // var ordername = 'Test';
+           // currentOrder.data.currentDiner = ordername;
+           // currentOrder.data.ordername.push(ordername);
+           // currentOrder.data.order[ordername] = ordername;
+           // currentOrder.data.placed[ordername] = ordername;
+            speechOutput = 'Initial Saved';
+            currentOrder.save(function () {           
+                 response.tell(speechOutput);
+            });
     };
 };
 exports.register = registerEventHandlers;

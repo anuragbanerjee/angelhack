@@ -1,146 +1,36 @@
-ResetOrderIntent clear
-ResetWholeIntent clear whole data
+ResetOrderIntent clear order for {username}
+ResetOrderIntent clear order for me
+ResetWholeIntent clear all orders
 
-StartOrder order a pizza
-StartOrder order some pizza
-StartOrder order me a pizza
-StartOrder order me some pizza
-StartOrder order us a pizza
-StartOrder order us some pizza
-StartOrder get a pizza
-StartOrder get some pizza
-StartOrder get me a pizza
-StartOrder get me some pizza
-StartOrder get us a pizza
-StartOrder get us some pizza
-StartOrder order food
-StartOrder order some food
-StartOrder order me food
-StartOrder order me some food
-StartOrder order us food
-StartOrder order us some food
-StartOrder get food
-StartOrder get some food
-StartOrder get me food
-StartOrder get me some food
-StartOrder get us food
-StartOrder get us some food
-StartOrder feed me a pizza
-StartOrder feed me a food
-StartOrder feed me some pizza
-StartOrder feed me some food
-StartOrder feed us a pizza
-StartOrder feed us a food
-StartOrder feed us some pizza
-StartOrder feed us some food
-StartOrder get pizza
-StartOrder get pizza for tonight
-StartOrder get food
-StartOrder get food for tonight
-StartOrder feed the office
-StartOrder we're hungry
-StartOrder we're really hungry
-StartOrder we are hungry
-StartOrder we are really hungry
-StartOrder I'm hungry
-StartOrder I'm really hungry
-StartOrder I am hungry
-StartOrder I am really hungry
-StartOrder we're dying of hunger
-StartOrder we are dying of hunger
-StartOrder I'm dying of hunger
-StartOrder I am dying of hunger
-StartOrder we're in need of pizza
-StartOrder we're in need of a pizza
-StartOrder we're in need of some pizza
-StartOrder we are in need of pizza
-StartOrder we are in need of a pizza
-StartOrder we are in need of some pizza
-StartOrder I'm in need of pizza
-StartOrder I'm in need of a pizza
-StartOrder I'm in need of some pizza
-StartOrder I am in need of pizza
-StartOrder I am in need of a pizza
-StartOrder I am in need of some pizza
-StartOrder we're ravenous
-StartOrder we're starving
-StartOrder we are ravenous
-StartOrder we are starving
-StartOrder I'm ravenous
-StartOrder I'm starving
-StartOrder I am ravenous
-StartOrder I am starving
+RepeatOrderIntent repeat order for {username}
 
-AddNameToOrder {username}
-AddNameToOrder My name is {username}
-AddNameToOrder The order will be in the name of {username}
+AddNameToOrder my name is {username}
 
 AddToOrder a {item} pizza
 AddToOrder a {item}
 AddToOrder an {item} pizza
 AddToOrder an {item}
 AddToOrder {item} pizza
-AddToOrder {item}
 AddToOrder {quantity} {item} pizzas
 AddToOrder {quantity} {item}
 AddToOrder a {item}
 
 AddToOrder an {item}
 
-AddToOrder an {item} pizzas
-
 AddToOrder {quantity} {item}
-
-AddToOrder {quantity} {item} pizza
-
 AddToOrder get me a {item}
-
-AddToOrder get me a {item} pizza
-
-AddToOrder get me a {item} pizzas
-
 AddToOrder get me an {item}
-
-AddToOrder get me an {item} pizza
-
-AddToOrder get me an {item} pizzas
-
 AddToOrder get me {quantity} {item}
-
-AddToOrder get me {quantity} {item} pizza
-
-AddToOrder get me {quantity} {item} pizzas
-
 AddToOrder can I have a {item}
-
-AddToOrder can I have a {item} pizza
-
-AddToOrder can I have a {item} pizzas
-
 AddToOrder can I have an {item}
-
-AddToOrder can I have an {item} pizza
-
-AddToOrder can I have an {item} pizzas
-
 AddToOrder can I have {quantity} {item}
-
-AddToOrder can I have {quantity} {item} pizza
-
-AddToOrder can I have {quantity} {item} pizzas
-
 AddToOrder I'll have a {item}
-
-AddToOrder I'll have a {item} pizza
-
-AddToOrder I'll have a {item} pizzas
 
 AddToOrder I'll have an {item}
 AddToOrder I'll have an {item} pizza
 AddToOrder I'll have an {item} pizzas
 AddToOrder I'll have {quantity} {item}
-AddToOrder I'll have {quantity} {item} pizza
-AddToOrder I'll have {quantity} {item} pizzas
+
 AddToOrder I will have a {item}
 AddToOrder I will have a {item} pizza
 AddToOrder I will have a {item} pizzas
@@ -148,63 +38,41 @@ AddToOrder I will have an {item}
 AddToOrder I will have an {item} pizza
 AddToOrder I will have an {item} pizzas
 AddToOrder I will have {quantity} {item}
-AddToOrder I will have {quantity} {item} pizza
-AddToOrder I will have {quantity} {item} pizzas
+
 AddToOrder I'd like a {item}
-AddToOrder I'd like a {item} pizza
-AddToOrder I'd like a {item} pizzas
+
 AddToOrder I'd like an {item}
-AddToOrder I'd like an {item} pizza
-AddToOrder I'd like an {item} pizzas
+
 AddToOrder I'd like {quantity} {item}
-AddToOrder I'd like {quantity} {item} pizza
-AddToOrder I'd like {quantity} {item} pizzas
+
 AddToOrder I would like a {item}
-AddToOrder I would like a {item} pizza
-AddToOrder I would like a {item} pizzas
+
 AddToOrder I would like an {item}
-AddToOrder I would like an {item} pizza
-AddToOrder I would like an {item} pizzas
+
 AddToOrder I would like {quantity} {item}
-AddToOrder I would like {quantity} {item} pizza
-AddToOrder I would like {quantity} {item} pizzas
+
 AddToOrder I'd like to have a {item}
-AddToOrder I'd like to have a {item} pizza
-AddToOrder I'd like to have a {item} pizzas
+
 AddToOrder I'd like to have an {item}
-AddToOrder I'd like to have an {item} pizza
-AddToOrder I'd like to have an {item} pizzas
+
 AddToOrder I'd like to have {quantity} {item}
-AddToOrder I'd like to have {quantity} {item} pizza
-AddToOrder I'd like to have {quantity} {item} pizzas
-AddToOrder I would like to have a {item} pizza
-AddToOrder I would like to have a {item} pizzas
 AddToOrder I would like to have an {item}
-AddToOrder I would like to have an {item} pizza
-AddToOrder I would like to have an {item} pizzas
+
 AddToOrder I would like to have {quantity} {item}
-AddToOrder I would like to have {quantity} {item} pizza
-AddToOrder I would like to have {quantity} {item} pizzas
+
 AddToOrder I'll also have a {item}
-AddToOrder I'll also have a {item} pizza
-AddToOrder I'll also have a {item} pizzas
 AddToOrder I'll also have an {item}
-AddToOrder I'll also have an {item} pizza
-AddToOrder I'll also have an {item} pizzas
 AddToOrder I'll also have {quantity} {item}
-AddToOrder I'll also have {quantity} {item} pizza
-AddToOrder I'll also have {quantity} {item} pizzas
 AddToOrder I will also have a {item}
-AddToOrder I will also have a {item} pizza
-AddToOrder I will also have a {item} pizzas
 AddToOrder I will also have an {item}
-AddToOrder I will also have an {item} pizza
-AddToOrder I will also have an {item} pizzas
 AddToOrder I will also have {quantity} {item}
-AddToOrder I will also have {quantity} {item} pizza
-AddToOrder I will also have {quantity} {item} pizzas
 AddToOrder {quantity} {item} pizzas
 
+InBetweenOrderIntent let me come back
+InBetweenOrderIntent i will be back
+InBetweenOrderIntent i need time to think
+InBetweenOrderIntent wait for some time
+InBetweenOrderIntent back
 
 NoIntent no
 NoIntent no thank you
@@ -275,18 +143,12 @@ NoIntent that will be all thanks
 YesIntent hell yeah
 YesIntent yes please
 YesIntent yes thanks
-YesIntent of course
-YesIntent make it so
 YesIntent yeah order it
 YesIntent yes
 YesIntent yes please hurry
 YesIntent yes give me more
-YesIntent yes we're pretty hungry
-YesIntent yes we are pretty hungry
 YesIntent yes make it happen
 YesIntent yeah
 YesIntent yeah please hurry
 YesIntent yeah give me more
-YesIntent yeah we're pretty hungry
-YesIntent yeah we are pretty hungry
 YesIntent yeah make it happen

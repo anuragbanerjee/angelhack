@@ -2,9 +2,6 @@
   "intents": [
     
     {
-      "intent": "StartOrder"
-    },
-    {
       "intent": "AddNameToOrder",
       "slots": [
         {
@@ -27,7 +24,16 @@
       ]
     },
     {
-      "intent": "ResetOrderIntent"
+      "intent":"InBetweenOrderIntent"
+    },
+    {
+      "intent": "ResetOrderIntent",
+      "slots": [
+        {
+          "name": "username",
+          "type": "AMAZON.US_FIRST_NAME"
+        }
+      ]
     },
     {
       "intent": "ResetWholeIntent"
@@ -37,6 +43,15 @@
     },
     {
       "intent":"NoIntent"
+    },
+    {
+      "intent":"RepeatOrderIntent",
+      "slots": [
+        {
+          "name": "username",
+          "type": "AMAZON.US_FIRST_NAME"
+        }
+      ]
     }
   ]
 }
