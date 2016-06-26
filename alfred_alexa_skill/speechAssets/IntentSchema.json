@@ -1,6 +1,6 @@
 {
   "intents": [
-    
+
     {
       "intent": "AddNameToOrder",
       "slots": [
@@ -43,6 +43,9 @@
     },
     {
       "intent":"NoIntent"
+    },
+    {
+        "intent":"EndOrderIntent"
     },
     {
       "intent":"RepeatOrderIntent",

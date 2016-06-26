@@ -128,15 +128,12 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
 
         storage.loadOrder(session, function (currentOrder) {
 
-
             var ordername  = currentOrder.data.currentDiner;
             currentOrder.data.placed[ordername] = 'Yes';
 
             var speechOutput  = 'Order finished for ' + ordername + '. Should I place the order?' ;
-             var reprompt;
             currentOrder.save(function () {
-                    response.ask(speechOutput);
-
+                response.ask(speechOutput);
             });
         });
     };
@@ -155,11 +152,11 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
 
 <<<<<<< Updated upstream
             var speechOutput  = 'Order finished for ' + ordername + '. You will receive your order shortly.' ;
-             var reprompt; 
+             var reprompt;
             currentOrder.save(function () {
-              
+
                     response.tell(speechOutput);
-                
+
 =======
             var speechOutput  = 'Order finished for ' + ordername + '. Wait for getting the order.' ;
              var reprompt;

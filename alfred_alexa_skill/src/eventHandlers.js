@@ -20,8 +20,8 @@ var registerEventHandlers = function (eventHandlers, skillContext) {
     };
 
     eventHandlers.onLaunch = function (launchRequest, session, response) {
-        //Speak welcome message.     
-            var speechOutput = 'Okay, We are ready for ordering';
+        //Speak welcome message.
+            var speechOutput = 'Okay, We are ready for ordering. What is your name?';
             response.ask(speechOutput);
            // var ordername = 'Test';
            // currentOrder.data.currentDiner = ordername;
