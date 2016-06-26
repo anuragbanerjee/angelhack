@@ -13,19 +13,19 @@ var textHelper = require('./textHelper'),
     storage = require('./storage');
 
 var registerIntentHandlers = function (intentHandlers, skillContext) {
-    intentHandlers.NewGameIntent = function (intent, session, response) {
+    intentHandlers.startOrder = function (intent, session, response) {
         //reset scores for all existing players
-        storage.loadGame(session, function (currentGame) {
-            if (currentGame.data.players.length === 0) {
-                response.ask('New game started. Who\'s your first player?',
-                    'Please tell me who\'s your first player?');
+        storage.loadOrder(session, function (currentOrder) {
+            if (currentOrder.data.items.length === 0) {
+                response.ask('New order started. Which item would you like to order first?',
+                    'Please tell me your first order item?');
                 return;
             }
-            currentGame.data.players.forEach(function (player) {
-                currentGame.data.scores[player] = 0;
+            currentOrder.data.items.forEach(function (item) {
+                currentOrder.data.modifications[item] = [];
             });
-            currentGame.save(function () {
-                var speechOutput = 'New game started with '
+            currentOrder.save(function () {
+                var speechOutput = 'New order started with '
                     + currentGame.data.players.length + ' existing player';
                 if (currentGame.data.players.length > 1) {
                     speechOutput += 's';

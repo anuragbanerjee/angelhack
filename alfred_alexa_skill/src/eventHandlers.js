@@ -23,22 +23,22 @@ var registerEventHandlers = function (eventHandlers, skillContext) {
     eventHandlers.onLaunch = function (launchRequest, session, response) {
         //Speak welcome message and ask user questions
         //based on whether there are players or not.
-        storage.loadGame(session, function (currentGame) {
+        storage.loadOrder(session, function (currentGame) {
             var speechOutput = '',
                 reprompt;
-            if (currentGame.data.players.length === 0) {
-                speechOutput += 'Diner, Let\'s start your order. What is the first item you would like to order?';
-                reprompt = "Please tell me your first order item.";
-            } else if (currentGame.isEmptyScore()) {
-                speechOutput += 'Diner, '
-                    + 'you have ordered ' + currentGame.data.players.length + ' item';
-                if (currentGame.data.players.length > 1) {
+            if (currentOrder.data.name === null) {
+                speechOutput += 'Diner, Let\'s start your order. Which name would you like to put on the order?';
+                reprompt = "Please tell me your name.";
+            } else if (currentOrder.isEmptyOrder()) {
+                speechOutput += currentOrder.data.name + ', '
+                    + 'you have ordered ' + currentGame.data.items.length + ' item';
+                if (currentGame.data.items.length > 1) {
                     speechOutput += 's';
                 }
                 speechOutput += '. You can modify the existing order, order another item, reset the whole order or exit. Which would you like?';
                 reprompt = textHelper.completeHelp;
             } else {
-                speechOutput += 'Diner, What can I do for you?';
+                speechOutput += currentOrder.data.name + ', What can I do for you?';
                 reprompt = textHelper.nextHelp;
             }
             response.ask(speechOutput, reprompt);
