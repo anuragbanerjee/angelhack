@@ -25,15 +25,15 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
                 currentOrder.data.modifications[item] = [];
             });
             currentOrder.save(function () {
-                var speechOutput = 'New order started with '
-                    + currentGame.data.players.length + ' existing player';
+                var speechOutput = 'Order continued with '
+                    + currentOrder.data.items.length + ' existing item';
                 if (currentGame.data.players.length > 1) {
                     speechOutput += 's';
                 }
                 speechOutput += '.';
                 if (skillContext.needMoreHelp) {
-                    speechOutput += '. You can give a player points, add another player, reset all players or exit. What would you like?';
-                    var repromptText = 'You can give a player points, add another player, reset all players or exit. What would you like?';
+                    speechOutput += '. You can modify the existing order, order another item, reset the whole order or exit. Which would you like?';
+                    var repromptText = 'You can modify the existing order, order another item, reset the whole order or exit. Which would you like?';
                     response.ask(speechOutput, repromptText);
                 } else {
                     response.tell(speechOutput);
