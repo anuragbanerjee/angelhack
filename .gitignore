@@ -1,0 +1,8 @@
+
+# webstorm config file
+.idea
+.idea/
+
+# dependencies, npm install
+RestaurantDashboard/node_modules
+RestaurantDashboard/node_modules/

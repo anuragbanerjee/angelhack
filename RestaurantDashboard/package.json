@@ -1,0 +1,19 @@
+{
+  "name": "restaurantdashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js --progress --colors"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "material-ui": "^0.15.1",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
+  },
+  "devDependencies": {
+    "webpack": "^1.13.1"
+  }
+}
