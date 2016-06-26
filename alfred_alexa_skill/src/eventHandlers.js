@@ -1,5 +1,6 @@
 /**
-    Copyright 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+    Copyright 2016 Team Batman (Devesh Singh, Akshay Chalana, AJ Banerjee, Chaitya Shah, and Daniel Jamrozik)
+    Based on work by 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
 
@@ -22,22 +23,22 @@ var registerEventHandlers = function (eventHandlers, skillContext) {
     eventHandlers.onLaunch = function (launchRequest, session, response) {
         //Speak welcome message and ask user questions
         //based on whether there are players or not.
-        storage.loadGame(session, function (currentGame) {
+        storage.loadOrder(session, function (currentGame) {
             var speechOutput = '',
                 reprompt;
-            if (currentGame.data.players.length === 0) {
-                speechOutput += 'ScoreKeeper, Let\'s start your game. Who\'s your first player?';
-                reprompt = "Please tell me who is your first player?";
-            } else if (currentGame.isEmptyScore()) {
-                speechOutput += 'ScoreKeeper, '
-                    + 'you have ' + currentGame.data.players.length + ' player';
-                if (currentGame.data.players.length > 1) {
+            if (currentOrder.data.name === null) {
+                speechOutput += 'Diner, Let\'s start your order. Which name would you like to put on the order?';
+                reprompt = "Please tell me your name.";
+            } else if (currentOrder.isEmptyOrder()) {
+                speechOutput += currentOrder.data.name + ', '
+                    + 'you have ordered ' + currentGame.data.items.length + ' item';
+                if (currentGame.data.items.length > 1) {
                     speechOutput += 's';
                 }
-                speechOutput += ' in the game. You can give a player points, add another player, reset all players or exit. Which would you like?';
+                speechOutput += '. You can modify the existing order, order another item, reset the whole order or exit. Which would you like?';
                 reprompt = textHelper.completeHelp;
             } else {
-                speechOutput += 'ScoreKeeper, What can I do for you?';
+                speechOutput += currentOrder.data.name + ', What can I do for you?';
                 reprompt = textHelper.nextHelp;
             }
             response.ask(speechOutput, reprompt);
