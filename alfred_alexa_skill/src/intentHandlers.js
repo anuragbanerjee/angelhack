@@ -116,14 +116,6 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
         });
     };
 
-
-    intentHandlers.ResetWholeIntent = function (intent, session, response) {
-        //remove all players
-        storage.newOrder(session).save(function () {
-            response.tell('Every order cleared.');
-        });
-};
-
     intentHandlers.NoIntent = function (intent, session, response) {
 
         storage.loadOrder(session, function (currentOrder) {
@@ -159,6 +151,16 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
             });
         });
     };
+    intentHandlers.ResetWholeIntent = function (intent, session, response) {
+        //remove all players
+        storage.newOrder(session).save(function () {
+            response.tell('Every order cleared.');
+        });
+
 
 };
+
+};
+
+
 exports.register = registerIntentHandlers;
