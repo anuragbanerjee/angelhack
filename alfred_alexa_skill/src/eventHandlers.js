@@ -1,5 +1,6 @@
 /**
-    Copyright 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+    Copyright 2016 Team Batman (Devesh Singh, Akshay Chalana, AJ Banerjee, Chaitya Shah, and Daniel Jamrozik)
+    Based on work by 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
 
@@ -26,18 +27,20 @@ var registerEventHandlers = function (eventHandlers, skillContext) {
             var speechOutput = '',
                 reprompt;
             if (currentGame.data.players.length === 0) {
-                speechOutput += 'ScoreKeeper, Let\'s start your game. Who\'s your first player?';
-                reprompt = "Please tell me who is your first player?";
+                speechOutput += 'Diner, Let\'s start your order. What is the name of the person who will order first?';
+                reprompt = "Please tell me who is your first orderer?";
             } else if (currentGame.isEmptyScore()) {
-                speechOutput += 'ScoreKeeper, '
-                    + 'you have ' + currentGame.data.players.length + ' player';
+                speechOutput += 'Diner, '
+                    + 'you have ' + currentGame.data.players.length + ' orderer';
                 if (currentGame.data.players.length > 1) {
-                    speechOutput += 's';
+                    speechOutput += 's have';
+                } else {
+                    speechOutput += ' has'
                 }
-                speechOutput += ' in the game. You can give a player points, add another player, reset all players or exit. Which would you like?';
+                speechOutput += ' ordered. You can modify the existing order, order for another diner, reset all diners or exit. Which would you like?';
                 reprompt = textHelper.completeHelp;
             } else {
-                speechOutput += 'ScoreKeeper, What can I do for you?';
+                speechOutput += 'Diner, What can I do for you?';
                 reprompt = textHelper.nextHelp;
             }
             response.ask(speechOutput, reprompt);
