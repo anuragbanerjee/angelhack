@@ -155,6 +155,7 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
             currentOrder.save(function () {
 
                     response.tell(speechOutput);
+
             });
         });
     };
