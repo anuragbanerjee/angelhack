@@ -45,9 +45,6 @@
       "intent":"NoIntent"
     },
     {
-        "intent":"EndOrderIntent"
-    },
-    {
       "intent":"RepeatOrderIntent",
       "slots": [
         {
