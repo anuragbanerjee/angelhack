@@ -20,9 +20,7 @@ var registerEventHandlers = function (eventHandlers, skillContext) {
     };
 
     eventHandlers.onLaunch = function (launchRequest, session, response) {
-        //Speak welcome message and ask user questions
-        //based on whether there are players or not.
-     
+        //Speak welcome message.     
             var speechOutput = 'Okay, We are ready for ordering';
             response.ask(speechOutput);
            // var ordername = 'Test';
@@ -31,7 +29,7 @@ var registerEventHandlers = function (eventHandlers, skillContext) {
            // currentOrder.data.order[ordername] = ordername;
            // currentOrder.data.placed[ordername] = ordername;
             speechOutput = 'Initial Saved';
-            currentOrder.save(function () {           
+            currentOrder.save(function () {
                  response.tell(speechOutput);
             });
     };
