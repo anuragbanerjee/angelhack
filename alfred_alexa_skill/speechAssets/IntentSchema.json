@@ -1,44 +1,49 @@
 {
   "intents": [
     {
-      "intent": "AddPlayerIntent",
+      "intent": "Login",
       "slots": [
         {
-          "name": "PlayerName",
-          "type": "LIST_OF_PLAYER_NAMES"
-        }
-      ]
-    },
-    {
-      "intent": "AddScoreIntent",
-      "slots": [
-        {
-          "name": "PlayerName",
-          "type": "LIST_OF_PLAYER_NAMES"
-        },
-        {
-          "name": "ScoreNumber",
+          "name": "username",
           "type": "AMAZON.NUMBER"
         }
       ]
     },
     {
-      "intent": "ResetPlayersIntent"
+      "intent": "Logout"
     },
     {
-      "intent": "NewGameIntent"
+      "intent": "StartOrder"
     },
     {
-      "intent": "TellScoresIntent"
+      "intent": "AddToOrder",
+      "slots": [
+        {
+          "name": "item",
+          "type": "MenuItem"
+        },
+        {
+          "name": "quantity",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "itemtwo",
+          "type": "MenuItem"
+        },
+        {
+          "name": "quantitytwo",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.YesIntent"
+    },
+    {
+      "intent": "AMAZON.NoIntent"
     },
     {
       "intent": "AMAZON.HelpIntent"
-    },
-    {
-      "intent": "AMAZON.StopIntent"
-    },
-    {
-      "intent": "AMAZON.CancelIntent"
     }
   ]
 }
