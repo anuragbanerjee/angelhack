@@ -150,21 +150,12 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
             delete currentOrder.data.order[ordername];
             delete currentOrder.data.placed[ordername]; */
 
-<<<<<<< HEAD
 
             var speechOutput  = 'Order finished for ' + ordername + '. You will receive your order shortly.' ;
              var reprompt;
             currentOrder.save(function () {
 
                     response.tell(speechOutput);
-=======
-            var speechOutput  = 'Order finished for ' + ordername + '. Wait for getting the order.' ;
-             var reprompt; 
-            currentOrder.save(function () {
-              
-                    response.ask(speechOutput);
-                
->>>>>>> parent of 2f8a749... Fix ask/tell and grammar
             });
         });
     };
