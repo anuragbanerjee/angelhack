@@ -5,6 +5,8 @@ ResetWholeIntent clear all orders
 RepeatOrderIntent repeat order for {username}
 
 AddNameToOrder my name is {username}
+AddNameToOrder i am {username}
+AddNameToOrder i'm {username}
 
 AddToOrder a {item} pizza
 AddToOrder a {item}

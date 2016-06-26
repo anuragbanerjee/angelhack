@@ -119,7 +119,7 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
     intentHandlers.ResetWholeIntent = function (intent, session, response) {
         //remove all players
         storage.newOrder(session).save(function () {
-            response.ask('Every order cleared.');
+            response.tell('Every order cleared.');
         });
 };
 
@@ -146,17 +146,17 @@ var registerIntentHandlers = function (intentHandlers, skillContext) {
             
             var ordername  = currentOrder.data.currentDiner;
             
-            var orderindex = currentOrder.data.ordername.indexOf(ordername);
+           /* var orderindex = currentOrder.data.ordername.indexOf(ordername);
             currentOrder.data.ordername.splice(orderindex, 1);
 
             delete currentOrder.data.order[ordername];
-            delete currentOrder.data.placed[ordername];
+            delete currentOrder.data.placed[ordername]; */
 
             var speechOutput  = 'Order finished for ' + ordername + '. Wait for getting the order.' ;
              var reprompt; 
             currentOrder.save(function () {
               
-                    response.tell(speechOutput);
+                    response.ask(speechOutput);
                 
             });
         });
