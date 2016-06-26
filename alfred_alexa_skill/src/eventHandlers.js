@@ -27,17 +27,15 @@ var registerEventHandlers = function (eventHandlers, skillContext) {
             var speechOutput = '',
                 reprompt;
             if (currentGame.data.players.length === 0) {
-                speechOutput += 'Diner, Let\'s start your order. What is the name of the person who will order first?';
-                reprompt = "Please tell me who is your first orderer?";
+                speechOutput += 'Diner, Let\'s start your order. What is the first item you would like to order?';
+                reprompt = "Please tell me your first order item.";
             } else if (currentGame.isEmptyScore()) {
                 speechOutput += 'Diner, '
-                    + 'you have ' + currentGame.data.players.length + ' orderer';
+                    + 'you have ordered ' + currentGame.data.players.length + ' item';
                 if (currentGame.data.players.length > 1) {
-                    speechOutput += 's have';
-                } else {
-                    speechOutput += ' has'
+                    speechOutput += 's';
                 }
-                speechOutput += ' ordered. You can modify the existing order, order for another diner, reset all diners or exit. Which would you like?';
+                speechOutput += '. You can modify the existing order, order another item, reset the whole order or exit. Which would you like?';
                 reprompt = textHelper.completeHelp;
             } else {
                 speechOutput += 'Diner, What can I do for you?';
