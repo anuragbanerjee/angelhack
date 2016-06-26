@@ -1,0 +1,31 @@
+StartOrder [order|get][ me| us]? [a|some] pizza
+StartOrder [order|get][ me| us]?[ some]? food
+StartOrder feed[ me| us] [a|some] [pizza|food]
+StartOrder get [pizza|food] [for tonight]?
+StartOrder feed the office
+StartOrder [we['re| are]|I['m| am]][ really]? hungry
+StartOrder [we['re| are]|I['m| am]] dying of hunger
+StartOrder [we['re| are]|I['m| am]] in need of[ a| some]? pizza
+StartOrder [we['re| are]|I['m| am]] [ravenous|starving]
+
+AddToOrder[ a| an|] {item} [pizza|]
+AddToOrder {quantity} {item} [pizzas|]
+AddToOrder[ get me| can I have| I['ll| will] have| I['d| would] like| I['d| would] like to have| I['ll| will] also have]? [a|an|{quantity}] {item}[ pizza| pizzas]?[ and [a|an|{quantity}] {itemtwo}[ pizza| pizzas]?]?
+
+Login login user {username}
+Login register mirror {username}
+Logout logout
+
+AMAZON.NoIntent[ no[ thanks| way]?|[ we['re| are] done]?]+[ thank you| thanks]?
+AMAZON.NoIntent negative
+AMAZON.NoIntent definitely not
+AMAZON.NoIntent[ no]? that['s| is| should be] enough
+AMAZON.NoIntent[ I think]? that'll do[ thank you| thanks]?
+AMAZON.NoIntent that['ll| will] be [heaps|fine|all][ thank you| thanks]?
+
+AMAZON.YesIntent hell yeah
+AMAZON.YesIntent yes [please|thanks]
+AMAZON.YesIntent of course
+AMAZON.YesIntent make it so
+AMAZON.YesIntent yeah order it
+AMAZON.YesIntent [yes|yeah] [please hurry|give me more|we['re| are] pretty hungry|make it happen]?
