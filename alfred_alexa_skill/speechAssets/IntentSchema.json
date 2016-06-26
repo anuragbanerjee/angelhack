@@ -1,19 +1,17 @@
 {
   "intents": [
+    
     {
-      "intent": "Login",
+      "intent": "StartOrder"
+    },
+    {
+      "intent": "AddNameToOrder",
       "slots": [
         {
           "name": "username",
-          "type": "AMAZON.NUMBER"
+          "type": "AMAZON.US_FIRST_NAME"
         }
       ]
-    },
-    {
-      "intent": "Logout"
-    },
-    {
-      "intent": "StartOrder"
     },
     {
       "intent": "AddToOrder",
@@ -24,14 +22,6 @@
         },
         {
           "name": "quantity",
-          "type": "AMAZON.NUMBER"
-        },
-        {
-          "name": "itemtwo",
-          "type": "MenuItem"
-        },
-        {
-          "name": "quantitytwo",
           "type": "AMAZON.NUMBER"
         }
       ]
