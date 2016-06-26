@@ -109,7 +109,60 @@
 	};
 
 	// TEMP - mock data
-	var mockOrders = [{ date: '06/26/2016 1:20AM', order: [{ item: 'pepperoni pizza', quantity: 1 }, { item: 'breadsticks', quantity: 1 }, { item: 'Cheese pizza', quantity: 4 }], isCompleted: false }, { date: '06/26/2016 1:22AM', order: [{ item: 'breadsticks', quantity: 3 }, { item: 'Cheese pizza', quantity: 1 }], isCompleted: false }, { date: '06/26/2016 1:23AM', order: [{ item: 'pepperoni pizza', quantity: 1 }, { item: '1 Liter of Sprite', quantity: false }], isCompleted: false }, { date: '06/26/2016 1:26AM', order: [{ item: 'mushroom pizza', quantity: 2 }, { item: 'breadsticks', quantity: 1 }, { item: 'Cheese pizza', quantity: 2 }, { item: '1 Liter of Sprite', quantity: false }], isCompleted: false }];
+	//var mockOrders = [{ date: '06/26/2016 1:20AM', order: [{ item: 'pepperoni pizza', quantity: 1 }, { item: 'breadsticks', quantity: 1 }, { item: 'Cheese pizza', quantity: 4 }], isCompleted: false }, { date: '06/26/2016 1:22AM', order: [{ item: 'breadsticks', quantity: 3 }, { item: 'Cheese pizza', quantity: 1 }], isCompleted: false }, { date: '06/26/2016 1:23AM', order: [{ item: 'pepperoni pizza', quantity: 1 }, { item: '1 Liter of Sprite', quantity: false }], isCompleted: false }, { date: '06/26/2016 1:26AM', order: [{ item: 'mushroom pizza', quantity: 2 }, { item: 'breadsticks', quantity: 1 }, { item: 'Cheese pizza', quantity: 2 }, { item: '1 Liter of Sprite', quantity: false }], isCompleted: false }];
+	var mockOrders=[];
+	const orderers = [];
+
+	// Populate mockOrders with real orders
+	var settings = {
+	  "async": true,
+	  "crossDomain": true,
+	  "url": "https://q36tn2i2k7.execute-api.us-east-1.amazonaws.com/prod/",
+	  "method": "POST",
+	  "headers": {
+	    "accept": "application/json",
+	    "authorization": "AWS4-HMAC-SHA256 Credential=AKIAIABTV5I7DNEFBH6Q/20160626/us-east-1/execute-api/aws4_request, SignedHeaders=accept;content-type;host;x-amz-date, Signature=77fc57513716c146f5bf606d5eb3f99828bbb5aedac314eb778c4bd83a95d5e4",
+	    "content-type": "application/json",
+	    "host": "wbcghspoej.execute-api.us-east-1.amazonaws.com",
+	    "x-amz-date": "20160626T132743Z"
+	  },
+	  "processData": false,
+	  "data": "{\n  \"operation\": \"read\",\n  \"tableName\": \"Orders\",\n  \"payload\": { \n    \"TableName\" : \"Orders\",\n    \"Key\" : {\n        \"OrderId\": \"amzn1.ask.account.AFP3ZWPOS2BGJR7OWJZ3DHPKMOMNWY4AY66FUR7ILBWANIHQN73QHP4QSESDAI7CS2YFY4XLHEZO55GJENHXHEXQV6IOPRD6CGXTABP3VJJEG4D27MWN22O4U7TCHRKOIHAURMJU2EDCMN6TZJ3TZYNIOMCTUK5UGT6JAKWXEAOBAZH3D2MJMSRCCOIIZTDHSHGOLBJ2OPHXOLQ\"\n    }\n  }\n}"
+	}
+
+	// Initial call
+	$.ajax(settings).done(function (response) {
+	  var data = JSON.parse(response["Item"]["Data"]);
+	  data["ordername"].forEach(function(orderer){
+		  orderers.push(orderer);
+		  var row = {date:moment(Date.now()).format("MM/DD/YYYY hh:mma"), order:[],
+			  isCompleted:false};
+		  for(var k in data["order"][orderer]) {
+			  row["order"].push({item:k, quantity:data["order"][orderer][k]});
+		  }
+		  console.log(row);
+		  mockOrders.push(row);
+		  }
+	  );
+  }).then(renderRows);
+
+	//Reload function
+	function reloadServerData() {
+		$.ajax(settings).done(function (response) {
+		  var data = JSON.parse(response["Item"]["Data"]);
+		  var currentDiner = data["currentDiner"];
+		  if (orderers.indexOf(currentDiner) < 0 && data["placed"][currentDiner] === "Yes") {
+		      orderers.push(data[currentDiner]);
+		      var row = {date:moment(Date.now()).format("MM/DD/YYYY hh:mma"), order:[],
+		          isCompleted:false};
+		      for(var k in data["orders"][currentDiner]) {
+		          row["order"].push({item:k, quantity:data["orders"][currentDiner][k]});
+		      }
+			  console.log(row);
+		      mockOrders.push(row);
+		  }
+		});
+	}
 
 	function FullPage(_ref) {
 	    var orders = _ref.orders;
@@ -126,8 +179,11 @@
 	    );
 	};
 
-	_reactDom2.default.render(_react2.default.createElement(FullPage, { orders: mockOrders }), document.getElementById('app'));
+	function renderRows() {
+		_reactDom2.default.render(_react2.default.createElement(FullPage, { orders: mockOrders }), document.getElementById('app'));
+	}
 
+	renderRows();
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
@@ -1251,7 +1307,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * 
+	 *
 	 */
 
 	function makeEmptyFunction(arg) {
@@ -11808,7 +11864,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * 
+	 *
 	 * @typechecks static-only
 	 */
 
@@ -15972,7 +16028,7 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
 	 * @typechecks
-	 * 
+	 *
 	 */
 
 	/*eslint-disable no-self-compare */
@@ -17800,7 +17856,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * 
+	 *
 	 */
 
 	var isTextNode = __webpack_require__(145);
