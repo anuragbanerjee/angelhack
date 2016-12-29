@@ -11,7 +11,7 @@
 
 'use strict';
 var storage = require('./storage');
-
+0
 var registerEventHandlers = function (eventHandlers, skillContext) {
     eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
         //if user said a one shot command that triggered an intent event,

@@ -133,6 +133,7 @@
 	// Initial call
 	$.ajax(settings).done(function (response) {
 	  var data = JSON.parse(response["Item"]["Data"]);
+	  console.log(data);
 	  data["ordername"].forEach(function(orderer){
 		  orderers.push(orderer);
 		  var row = {date:moment(Date.now()).format("MM/DD/YYYY hh:mma"), order:[],
